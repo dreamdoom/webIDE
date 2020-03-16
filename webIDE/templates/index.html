@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线代码编辑器</title>
+    <link rel="stylesheet" href="../static/css/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-contextmenu/3.0.0-beta.2/jquery.contextMenu.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/index.css" />
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-contextmenu/3.0.0-beta.2/jquery.contextMenu.min.js"></script>
+</head>
+<body>
+    <div class="loading hide"><img src="../static/images/loading.gif" alt="loading"></div>
+    <div>
+        <div class="shadow hide"></div>
+        <div class="delFileModel hide">
+            <p>文件将被删除！</p>
+            <button id="del" class="btn btn-danger">删除</button>
+            <button id="cancel" class="btn btn-info">取消</button>
+        </div>
+        <div class="model hide">
+            <div class="newFile">       <!-- 新建python和c文件 -->
+                <h4>新建文件</h4>
+                <span style="margin-left: -60%">文件名：</span>
+                <p>
+                    <input id="fileName" class="form-control" style="width: 80%;
+                    margin: auto;" type="text" placeholder="请输入文件名称："/>
+                </p>
+
+                <button id="addFile" class="btn btn-success btn-sm">确定</button>
+                <button class="btn btn-info btn-sm hideModel">取消</button>
+            </div>
+
+            <div class="newPro">        <!-- 新建java项目 -->
+                <h4>新建项目</h4>
+                <span style="margin-left: -60%">项目名：</span>
+                <p>
+                    <input id="proName" class="form-control" style="width: 80%;
+                    margin: auto;" type="text" placeholder="请输入项目名称："/>
+                </p>
+
+                <button id="addPro" class="btn btn-success btn-sm">确定</button>
+                <button class="btn btn-info btn-sm hideModel">取消</button>
+            </div>
+
+            <div class="newJavaFile">       <!-- 新建java文件 -->
+                <h4>新建文件</h4>
+                <span style="margin-left: -60%">文件名：</span>
+                <p>
+                    <input id="javaFileName" class="form-control" style="width: 80%;
+                    margin: auto;" type="text" placeholder="请输入文件名称：（xxx.java）"/>
+                </p>
+
+                <button id="addJavaFile" class="btn btn-success btn-sm">确定</button>
+                <button class="btn btn-info btn-sm hideModel">取消</button>
+            </div>
+
+
+        </div>
+    </div>
+    <div>
+        <div id="header">
+            <ul class="fileTypeList">
+                <li id="pythonFile" class="select" style="border-left: 1px solid #b3b3b3"><img src="../static/images/python.png" alt="pythonLogo" width="20px"> python</li>
+                <li id="javaFile"><img src="../static/images/java.png" alt="javaLogo" width="20px"> java</li>
+                <li id="cFile"><img src="../static/images/c.png" alt="cLogo" width="20px"> c</li>
+            </ul>
+            <p class="title">伐木累代码编辑器</p>
+        </div>
+        <div id="main">
+            <div id="directory">
+                <div class="pythonAndC">        <!-- python与c文件目录 -->
+                    <div id="createFile">
+                        <i class="fa fa-file-code-o" aria-hidden="true">&nbsp;&nbsp;&nbsp;</i>新建文件
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </div>
+                    <ul id="fileList"></ul>
+                </div>
+
+                <div class="java hide">     <!-- java项目目录 -->
+                    <div id="createPro">
+                        <i class="fa fa-file-code-o" aria-hidden="true">&nbsp;&nbsp;&nbsp;</i>新建项目
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </div>
+                    <ul id="proList"></ul>
+                </div>
+            </div>
+
+            <div id="code" class="hide">
+                <div class="cur">                <span class="curProName"></span><span class="curFileName"></span>
+</div>
+                <div id="codeContent">
+                    <pre id="editCode" contentEditable="true"></pre>
+                </div>
+                <ul class="lineNumber">
+
+                </ul>
+                <div class="console">
+                    <pre class="content" style="float: left; padding: 10px;"></pre>
+                    <span class="close">收起</span>
+                </div>
+                <button id="saveCode" class="btn btn-info">保存</button>
+                <button id="runCode" class="btn btn-success">运行</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../static/js/index.js"></script>
+</html>

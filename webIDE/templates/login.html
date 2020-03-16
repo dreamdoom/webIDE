@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="../static/css/index.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+    <div class="shadow"></div>
+    <div class="model">
+        <div id="app">
+            <div class="LR">
+                <div class="login active" @click="login">登录</div>
+                <div class="register" @click="register">注册</div>
+            </div>
+            <transition name="my" mode="out-in">
+            <login v-if="flag"></login>
+            <register v-else="flag"></register>
+            </transition>
+        </div>
+    </div>
+    <template id="login">
+        <div style="margin-top: 12px; padding: 0 5px;">
+            用户名：<label for="username">
+                <input id="username" class="form-control" type="text" name="username"/>
+            </label>
+            密&nbsp;&nbsp;&nbsp;码：<label for="password">
+                <input id="password" class="form-control" type="password" name="pwd" />
+            </label>
+            <input @click="logOk()" type="button" class="form-control btn btn-info" style="margin-top: 14px;" value="登录">
+        </div>
+    </template>
+
+    <template id="register">
+        <div style="margin-top: 12px; padding: 0 5px;">
+            用户名：<label for="username">
+                <input id="username" class="form-control" type="text" name="username"/>
+            </label>
+            密&nbsp;&nbsp;&nbsp;码：<label for="password">
+                <input id="password" class="form-control" type="password" name="pwd" />
+            </label>
+            <input @click="regOk()" type="button" class="form-control btn btn-info" style="margin-top: 14px;" value="注册">
+        </div>
+    </template>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    let vue = new Vue({
+        el: '#app',
+        data: {
+            flag: true
+        },
+        components: {
+            login: {
+                template: '#login'
+            },
+            register: {
+                template: '#register'
+            }
+        },
+        methods: {
+            login: function () {
+                if (!this.flag) {
+                    this.flag = !this.flag;
+                    $('.login').addClass('active');
+                    $('.register').removeClass('active');
+                }
+            },
+            register: function () {
+                if (this.flag) {
+                    this.flag = !this.flag;
+                    $('.login').removeClass('active');
+                    $('.register').addClass('active');
+                }
+            }
+        }
+    });
+    function logOk() {
+        $.ajax({
+            url: '/login.html',
+            type: 'post',
+            data: {
+                username: $('#username').val(),
+                password: $('#password').val()
+            },
+            success: function (args) {
+                if (args) {
+                    location.href = 'index.html?uid=' + args;
+                } else {
+                    alert('用户名或密码错误，请重新登录！')
+                }
+            }
+        })
+    }
+    function regOk() {
+        $.ajax({
+            url: '/register.html',
+            type: 'post',
+            data: {
+                username: $('#username').val(),
+                password: $('#password').val()
+            },
+            success: function (args) {
+                if (args) {
+                    alert('注册成功！');
+                    vue.flag = true;
+                    $('.login').addClass('active');
+                    $('.register').removeClass('active');
+                } else {
+                    alert('该账号已经注册，请勿重复注册！');
+                }
+            }
+        })
+    }
+</script>
+</html>
